@@ -1,3 +1,4 @@
+//Food Items
 const menu = [
   {
     id: 1,
@@ -72,3 +73,31 @@ const menu = [
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
 ];
+
+//Target the main div "section-center"
+const sectionCenter = document.querySelector('.section-center');
+
+window.addEventListener('DOMContentLoaded', function () {
+  console.log("shake and bake");
+  let displayMenu = menu.map(function(item) {
+    // console.log(item)
+    return `<article class="menu-item">
+    <img src=${item.img} class="photo" alt=${item.title} />
+    <div class="item-info">
+      <header>
+        <h4>${item.title}/h4>
+        <h4 class="price">${item.price}</h4>
+      </header>
+      <p class="item-text">
+      ${item.desc}
+        </p>
+    </div>
+  </article>`;
+  });
+  displayMenu = displayMenu.join('');
+  sectionCenter.innerHTML = displayMenu;
+  console.log(displayMenu);
+});
+
+//Iterate over items, add html, and place in sub-sections using map method
+
