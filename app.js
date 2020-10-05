@@ -72,6 +72,14 @@ const menu = [
     img: "./images/item-9.jpeg",
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
+  {
+    id: 10,
+    title: "steak dinner",
+    category: "dinner",
+    price: 35.99,
+    img: "./images/item-10.jpeg",
+    desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+  },
 ];
 
 //Target the main div "section-center"
@@ -82,7 +90,14 @@ const filterBtns = document.querySelectorAll('.filter-btn');
 window.addEventListener('DOMContentLoaded', function () {
   // console.log("shake and bake");
   displayMenuItems(menu);
-
+  //Get only unique categories
+  const categories = menu.reduce(function(values, item) {
+    if (!values.includes(item.category)) {
+      values.push(item.category)
+    }
+    return values
+  }, ['all']);
+  console.log(categories);
 });
 
 //Filter Items
@@ -90,6 +105,7 @@ filterBtns.forEach(function(btn) {
   btn.addEventListener('click', function (e) {
     // console.log(e.currentTarget.dataset.id)
     const category = e.currentTarget.dataset.id;
+    //Iterate over items, add html, and place in sub-sections using map method
     const menuCategory = menu.filter(function(menuItem) {
       // console.log(menuItem.category);
       if (menuItem.category === category) {
@@ -127,5 +143,6 @@ function displayMenuItems(menuItems) {
   // console.log(displayMenu);
 }
 
-//Iterate over items, add html, and place in sub-sections using map method
-
+//Get only unique categories
+//Iterate over categories return buttons
+//Make sure to select buttons when they are available
