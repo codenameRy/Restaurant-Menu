@@ -84,42 +84,17 @@ const menu = [
 
 //Target the main div "section-center"
 const sectionCenter = document.querySelector('.section-center');
-const filterBtns = document.querySelectorAll('.filter-btn');
+const container = document.querySelector('.btn-container');
 
 //Load Items
 window.addEventListener('DOMContentLoaded', function () {
   // console.log("shake and bake");
   displayMenuItems(menu);
   //Get only unique categories
-  const categories = menu.reduce(function(values, item) {
-    if (!values.includes(item.category)) {
-      values.push(item.category)
-    }
-    return values
-  }, ['all']);
-  console.log(categories);
+  displayMenuButtons();
 });
 
-//Filter Items
-filterBtns.forEach(function(btn) {
-  btn.addEventListener('click', function (e) {
-    // console.log(e.currentTarget.dataset.id)
-    const category = e.currentTarget.dataset.id;
-    //Iterate over items, add html, and place in sub-sections using map method
-    const menuCategory = menu.filter(function(menuItem) {
-      // console.log(menuItem.category);
-      if (menuItem.category === category) {
-        return menuItem;
-      }
-    });
-    // console.log(menuCategory);
-    if(category === 'all') {
-      displayMenuItems(menu)
-    } else {
-      displayMenuItems(menuCategory)
-    }
-  });
-});
+
 
 //Refactor
 function displayMenuItems(menuItems) {
@@ -146,3 +121,41 @@ function displayMenuItems(menuItems) {
 //Get only unique categories
 //Iterate over categories return buttons
 //Make sure to select buttons when they are available
+
+function displayMenuButtons () {
+  const categories = menu.reduce(function(values, item) {
+    if (!values.includes(item.category)) {
+      values.push(item.category)
+    }
+    return values
+  }, ['all']);
+  // console.log(categories);
+  const categoryBtns = categories.map(function (category) {
+    return `<button class="filter-btn" 
+    type="button" 
+    data-id=${category}>${category}</button>`
+  }).join('');
+  // console.log(categoryBtns)
+  container.innerHTML = categoryBtns;
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  //Filter Items
+filterBtns.forEach(function(btn) {
+  btn.addEventListener('click', function (e) {
+    // console.log(e.currentTarget.dataset.id)
+    const category = e.currentTarget.dataset.id;
+    //Iterate over items, add html, and place in sub-sections using map method
+    const menuCategory = menu.filter(function(menuItem) {
+      // console.log(menuItem.category);
+      if (menuItem.category === category) {
+        return menuItem;
+      }
+    });
+    // console.log(menuCategory);
+    if(category === 'all') {
+      displayMenuItems(menu)
+    } else {
+      displayMenuItems(menuCategory)
+    }
+  });
+});
+}
