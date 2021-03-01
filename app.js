@@ -90,7 +90,7 @@ const container = document.querySelector('.btn-container');
 window.addEventListener('DOMContentLoaded', function () {
   // console.log("shake and bake");
   displayMenuItems(menu);
-  //Get only unique categories
+  //Get only unique categories and menus
   displayMenuButtons();
 });
 
